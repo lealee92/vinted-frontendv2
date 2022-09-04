@@ -23,7 +23,7 @@ const Home = ({ data, isLoading }) => {
         </div>
       </div>
 
-      <div className="">
+      <div className="home-card-wrapper">
         {data.offers &&
           data.offers.map((card, index) => {
             return <Card key={index} data={card} />;

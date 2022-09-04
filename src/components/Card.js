@@ -5,7 +5,7 @@ const Card = ({ data }) => {
   return (
     <div className="card-container">
       <div
-        onClick={() => alert("go to user profile !")}
+        onClick={() => alert("Go to user profile !")}
         className="card-avatar-username"
       >
         {data.owner && data.owner.account.avatar && (
@@ -16,10 +16,11 @@ const Card = ({ data }) => {
         )}
         <span>{data.owner && data.owner.account.username}</span>
       </div>
+
       <div onClick={() => navigate(`offer/${data._id}`)}>
         <img alt={data.title} src={data.product_image.secure_url} />
-        <div className="card-price-brand">
-          <span>{data.product_price} EUR </span>
+        <div className="card-price-size-brand">
+          <span>{data.product_price} €</span>
           <span>{data.product_details[1]["TAILLE"]}</span>
           <span>{data.product_details[0]["MARQUE"]}</span>
         </div>

@@ -20,27 +20,31 @@ const Header = ({ setSearch }) => {
           />
         </div>
         <div className="header-btn">
-          <button
-            onClick={() => {
-              navigate("/signup");
-            }}
-          >
-            S'inscrire
-          </button>
-          <button
-            onClick={() => {
-              navigate("/login");
-            }}
-          >
-            Se connecter
-          </button>
-          <button
-            onClick={() => {
-              navigate("/publish");
-            }}
-          >
-            Vends tes articles
-          </button>
+          <div className="left-btn">
+            <button
+              onClick={() => {
+                navigate("/signup");
+              }}
+            >
+              S'inscrire
+            </button>
+            <button
+              onClick={() => {
+                navigate("/login");
+              }}
+            >
+              Se connecter
+            </button>
+          </div>
+          <div className="publish-btn">
+            <button
+              onClick={() => {
+                navigate("/publish");
+              }}
+            >
+              Vends tes articles
+            </button>
+          </div>
         </div>
       </div>
     </>

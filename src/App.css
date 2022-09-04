@@ -14,7 +14,51 @@ img {
 .container {
   display: flex;
   justify-content: space-between;
-  border: solid 2px black;
+}
+
+.search-input {
+  width: 550px;
+  padding-left: 15px;
+  outline: none;
+  height: 30px;
+  border-radius: 5px;
+  border: solid 1px lightgray;
+}
+
+.header-btn {
+  display: flex;
+  gap: 20px;
+}
+.header-btn button {
+  height: 30px;
+  width: 115px;
+  color: #2baeb7;
+  border: 1px solid #2cb1ba;
+  border-radius: 5px;
+  font-family: "Maison Neue";
+  font-size: 14px;
+  outline: none;
+}
+
+.header-btn > div {
+  display: flex;
+  gap: 5px;
+  height: 30px;
+  border-radius: 10px;
+  background-color: white;
+}
+
+.left-btn button {
+  outline: none;
+  border: 1px solid #2cb1ba;
+  background-color: white;
+  cursor: pointer;
+}
+
+.publish-btn button {
+  background-color: #2baeb7;
+  outline: none;
+  color: white;
 }
 
 /* HOME PAGE  */
@@ -38,7 +82,7 @@ img {
   width: 360px;
   background-color: white;
   padding: 25px;
-  border-radius: 5px;
+  border-radius: 3px;
   font-size: 34px;
   display: flex;
   flex-direction: column;
@@ -67,47 +111,44 @@ img {
   height: 80px;
   pointer-events: none;
 }
-/* 
 .home-card-wrapper {
   width: 1280px;
   display: flex;
+  flex-wrap: wrap;
   margin: auto;
   margin-top: 30px;
-} */
+}
 
 .card-container {
   width: 235px;
   padding: 0 6px 16px;
   cursor: pointer;
-  border: solid 10px green;
 }
 
 .card-container div:last-child img {
   height: 360px;
   width: 235px;
-  border-radius: 10px;
   object-fit: cover;
+  border-radius: 6px;
 }
 
 .card-avatar-username {
   display: flex;
   align-items: center;
-  border: solid 10px rebeccapurple;
-
   padding: 10px;
 }
 
 .card-avatar-username > img {
-  height: 30px;
-  width: 30px;
+  height: 25px;
+  width: 25px;
   object-fit: cover;
   border-radius: 50%;
   margin-right: 10px;
 }
 
 .card-avatar-username > span {
-  color: gray;
-  font-size: 14px;
+  color: #999999;
+  font-size: 12px;
 }
 
 .card-price-size-brand {
@@ -119,9 +160,9 @@ img {
 .card-price-size-brand span:first-child {
   font-size: 14px;
 }
-
 .card-price-size-brand span:not(:first-child) {
   font-size: 12px;
   color: #999999;
 }
+
 /* OFFER ************************************* */
