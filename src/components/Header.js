@@ -1,6 +1,5 @@
 import logo from "../assets/img/vinted.png";
 import { useNavigate } from "react-router-dom";
-import Home from "../pages/Home";
 
 const Header = ({ setSearch }) => {
   const navigate = useNavigate();

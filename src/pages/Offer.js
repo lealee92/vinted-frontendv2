@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-
 import axios from "axios";
 
 const Offer = () => {
   const params = useParams();
   const navigate = useNavigate();
-
-  const [data, setData] = useState([]);
+  const [data, setData] = useState({});
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -20,8 +18,9 @@ const Offer = () => {
     };
     fetchData();
   }, [params.id]);
+
   return isLoading ? (
-    <p>En cours de chargement</p>
+    <p>En cours de chargement </p>
   ) : (
     <div className="offer-body">
       <div className="offer-container">
@@ -79,7 +78,7 @@ const Offer = () => {
 
           <button
             onClick={() => {
-              navigate("/payment");
+              navigate("/payment", {});
             }}
           >
             Acheter
@@ -89,4 +88,5 @@ const Offer = () => {
     </div>
   );
 };
+
 export default Offer;
