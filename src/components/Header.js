@@ -1,52 +1,113 @@
+import React from "react";
 import logo from "../assets/img/vinted.png";
-import { useNavigate } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useNavigate, useLocation } from "react-router-dom";
+import PriceRange from "./PriceRange";
 
-const Header = ({ setSearch }) => {
+const Header = ({
+  token,
+  setUser,
+  setFetchRangeValues,
+  sortPrice,
+  setSortPrice,
+  setSearch,
+}) => {
   const navigate = useNavigate();
-  return (
-    <>
-      <div className="container">
-        <div onClick={() => navigate("/")}>
-          <img src={logo} alt="vinted" className="logo" />
-        </div>
 
-        <div className="search-container">
-          <input
-            className="search-input"
-            type="text"
-            placeholder="Rechercher des articles"
-            onChange={(event) => setSearch(event.target.value)}
-          />
-        </div>
-        <div className="header-btn">
-          <div className="left-btn">
-            <button
-              onClick={() => {
-                navigate("/signup");
-              }}
-            >
-              S'inscrire
-            </button>
-            <button
-              onClick={() => {
-                navigate("/login");
-              }}
-            >
-              Se connecter
-            </button>
-          </div>
-          <div className="publish-btn">
-            <button
-              onClick={() => {
-                navigate("/publish");
-              }}
-            >
-              Vends tes articles
-            </button>
-          </div>
-        </div>
+  const location = useLocation();
+
+  return (
+    <div className="header-container">
+      <div
+        onClick={() => {
+          navigate("/");
+        }}
+      >
+        <img className="header-logo" src={logo} alt="vinted" />
       </div>
-    </>
+
+      <div className="search-container">
+        <input
+          type="text"
+          className="search-input"
+          placeholder="Recherche des articles"
+          onChange={(event) => setSearch(event.target.value)}
+        />
+        <FontAwesomeIcon icon="search" className="search-input-icon" />
+        {location.pathname === "/" ? (
+          <div>
+            <div
+              style={{
+                marginTop: 25,
+                fontSize: "12px",
+                display: "flex",
+                alignItems: "center",
+              }}
+            >
+              <span style={{ marginRight: 10 }}>Trier par prix : </span>
+              <span className="checkbox">
+                <input
+                  type="checkbox"
+                  checked={sortPrice}
+                  onChange={() => {}}
+                  name="price"
+                />
+                <div
+                  className="wrapper"
+                  onClick={() => {
+                    setSortPrice(!sortPrice);
+                  }}
+                >
+                  <div className="knob">
+                    <span>{sortPrice ? "⇣" : "⇡"}</span>
+                  </div>
+                </div>
+              </span>
+              <span style={{ marginRight: 10 }}>Prix entre : </span>
+              <PriceRange setFetchRangeValues={setFetchRangeValues} />
+            </div>
+          </div>
+        ) : null}
+      </div>
+
+      {token ? (
+        <button
+          onClick={() => {
+            setUser(null);
+          }}
+          className="button-logout"
+        >
+          Se déconnecter
+        </button>
+      ) : (
+        <div>
+          <button
+            onClick={() => {
+              navigate("/signup");
+            }}
+            className="header-button button-login-signup button-signup"
+          >
+            S'inscrire
+          </button>
+          <button
+            onClick={() => {
+              navigate("/login");
+            }}
+            className="header-button button-login-signup"
+          >
+            Se connecter
+          </button>
+        </div>
+      )}
+      <button
+        onClick={() => {
+          navigate("/publish");
+        }}
+        className="header-button button-sold"
+      >
+        Vends tes articles
+      </button>
+    </div>
   );
 };
 
