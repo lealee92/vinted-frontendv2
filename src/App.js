@@ -1,23 +1,28 @@
-import "./App.css";
-
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import React, { useState, useEffect } from "react";
+import "./App.css";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Cookies from "js-cookie";
-import Home from "./pages/Home";
-import Offer from "./pages/Offer";
-import Header from "./components/Header";
-import SignUp from "./pages/SignUp";
-import Login from "./pages/Login";
-import Publish from "./pages/Publish";
-import Payment from "./pages/Payment";
-
 import axios from "axios";
 
+import Header from "./components/Header";
+import Home from "./pages/Home";
+import Signup from "./pages/SignUp";
+
+import Login from "./pages/Login";
+import Publish from "./pages/Publish";
+import Offer from "./pages/Offer";
+import Payment from "./pages/Payment";
+
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { faSearch, faCheck, faRedo } from "@fortawesome/free-solid-svg-icons";
+library.add(faSearch, faCheck, faRedo);
+
 function App() {
-  // tout ce qui concerne l'authentification se passe dans app.js
   const [token, setToken] = useState(Cookies.get("token") || null);
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [sortPrice, setSortPrice] = useState(false);
+  const [fetchRangeValues, setFetchRangeValues] = useState([0, 10000]);
   const [search, setSearch] = useState("");
 
   const setUser = (token) => {
@@ -33,28 +38,37 @@ function App() {
   useEffect(() => {
     const fetchData = async () => {
       const response = await axios.get(
-        "https://lereacteur-vinted-api.herokuapp.com/offers"
+        `https://lereacteur-vinted-api.herokuapp.com/offers?priceMin=${
+          fetchRangeValues[0]
+        }&priceMax=${fetchRangeValues[1]}&sort=${
+          sortPrice ? "price-desc" : "price-asc"
+        }&title=${search}`
       );
       setData(response.data);
       setIsLoading(false);
     };
     fetchData();
-  }, [search]);
-
+  }, [fetchRangeValues, sortPrice, search]);
   return (
-    <>
-      <Router>
-        <Header token={token} setUser={setUser} setSearch={setSearch} />
-        <Routes>
-          <Route path="/offer/:id" element={<Offer />} />
-          <Route path="/" element={<Home />} />
-          <Route path="/signup" element={<SignUp setUser={setUser} />} />
-          <Route path="/login" element={<Login setUser={setUser} />} />
-          <Route path="/publish" element={<Publish token={token} />} />
-          <Route path="/payment" element={<Payment />} />
-        </Routes>
-      </Router>
-    </>
+    <Router>
+      <Header
+        setUser={setUser}
+        token={token}
+        setFetchRangeValues={setFetchRangeValues}
+        fetchRangeValues={fetchRangeValues}
+        sortPrice={sortPrice}
+        setSortPrice={setSortPrice}
+        setSearch={setSearch}
+      />
+      <Routes>
+        <Route path="/" element={<Home data={data} isLoading={isLoading} />} />
+        <Route path="/signup" element={<Signup setUser={setUser} />} />
+        <Route path="/login" element={<Login setUser={setUser} />} />
+        <Route path="/publish" element={<Publish token={token} />} />
+        <Route path="/offer/:id" element={<Offer />} />
+        <Route path="/payment" element={<Payment />} />
+      </Routes>
+    </Router>
   );
 }
 

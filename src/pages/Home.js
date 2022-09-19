@@ -1,29 +1,17 @@
-import { useNavigate, Link } from "react-router-dom";
+import React from "react";
+import { useNavigate } from "react-router-dom";
 import Card from "../components/Card";
-import React, { useEffect, useState } from "react";
-import axios from "axios";
+import tear from "../assets/img/tear.svg";
 
-const Home = () => {
-  const [data, setData] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const response = await axios.get(
-        "https://lereacteur-vinted-api.herokuapp.com/offers"
-      );
-      setData(response.data);
-      setIsLoading(false);
-    };
-    fetchData();
-  }, []);
+const Home = ({ data, isLoading }) => {
   const navigate = useNavigate();
 
   return isLoading ? (
-    <p>en cours de chargement</p>
+    <p>En cours de chargement</p>
   ) : (
     <>
       <div className="home-hero-bg-img">
+        <img src={tear} alt="forme" className="home-hero-forme" />
         <div>
           <div className="home-hero-ready">
             Prêts à faire du tri dans vos placards ?
@@ -41,11 +29,7 @@ const Home = () => {
       <div className="home-card-wrapper">
         {data.offers &&
           data.offers.map((card, index) => {
-            return (
-              <Link to={`/offer/${card._id}`} key={card._id}>
-                <Card key={index} data={card} />;
-              </Link>
-            );
+            return <Card key={index} data={card} />;
           })}
       </div>
     </>
