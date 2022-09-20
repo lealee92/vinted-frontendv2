@@ -23,7 +23,14 @@ const Header = ({
           navigate("/");
         }}
       >
-        <img className="header-logo" src={logo} alt="vinted" />
+        <img
+          className="header-logo"
+          src={logo}
+          alt="vinted"
+          onClick={() => {
+            navigate("/home");
+          }}
+        />
       </div>
 
       <div className="search-container">

@@ -29,9 +29,9 @@ const PriceRange = ({ setFetchRangeValues }) => {
           <div
             ref={props.ref}
             style={{
-              height: "5px",
+              height: "6px",
               width: "100%",
-              borderRadius: "4px",
+              borderRadius: "5px",
               background: getTrackBackground({
                 values: rangeValues,
                 colors: ["#ccc", " #2cb1ba", "#ccc"],
